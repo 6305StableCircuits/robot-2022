@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.RobotIO;
+import frc.robot.RobotOI;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -29,7 +29,7 @@ public class TankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(RobotIO.m_leftStick.getY(), RobotIO.m_rightStick.getY());
+    m_drivetrain.drive(RobotOI.m_leftStick.getY(), RobotOI.m_rightStick.getY());
   }
 
   // Called once the command ends or is interrupted.
