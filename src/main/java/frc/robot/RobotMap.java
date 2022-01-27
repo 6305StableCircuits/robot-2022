@@ -6,8 +6,14 @@ package frc.robot;
  * changes on the fly.
  */
 public class RobotMap {
+    /** Ports */
     // The left drive motor port
     public static int leftDriveMotor = 1;
     // The right drive motor port
     public static int rightDriveMotor = 2;
+
+    /** Speeds */
+    // Intake Motor Speed
+    public static double intakeSpeed = 0.25;
+
 }
