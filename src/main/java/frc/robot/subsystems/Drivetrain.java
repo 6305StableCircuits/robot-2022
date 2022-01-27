@@ -25,8 +25,8 @@ public class Drivetrain extends SubsystemBase {
     m_rightMotor.restoreFactoryDefaults();
   }
 
-  public void drive(double xaxisSpeed, double zaxisRotate) {
-    m_drive.tankDrive(xaxisSpeed, zaxisRotate);
+  public void drive(double xaxisSpeed, double yaxisSpeed) {
+    m_drive.tankDrive(xaxisSpeed, yaxisSpeed);
   }
 
   @Override
