@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import com.revrobotics.CANSparkMax;
@@ -14,15 +15,25 @@ public class Drivetrain extends SubsystemBase {
   /** Initialize the Drivetrain. */
   
   // Initialize our Spark Max Motor Controllers 
-  private CANSparkMax m_leftMotor = new CANSparkMax(RobotMap.leftDriveMotor, MotorType.kBrushless);
-  private CANSparkMax m_rightMotor = new CANSparkMax(RobotMap.rightDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_topLeftMotor = new CANSparkMax(RobotMap.topLeftDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_bottomLeftMotor = new CANSparkMax(RobotMap.bottomLeftDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_topRightMotor = new CANSparkMax(RobotMap.topRightDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_bottomRightMotor = new CANSparkMax(RobotMap.bottomRightDriveMotor, MotorType.kBrushless);
   
+  // Create motor groups for drive.
+  private MotorControllerGroup m_leftMotorGroup = new MotorControllerGroup(m_topLeftMotor, m_bottomLeftMotor);
+  private MotorControllerGroup m_rightMotorGroup = new MotorControllerGroup(m_topRightMotor, m_bottomRightMotor);
+
   // Initialize our Drivetrain
-  private DifferentialDrive m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+  private DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
 
   public Drivetrain() {
-    m_leftMotor.restoreFactoryDefaults();
-    m_rightMotor.restoreFactoryDefaults();
+    m_topLeftMotor.restoreFactoryDefaults();
+    m_bottomLeftMotor.restoreFactoryDefaults();
+    m_topRightMotor.restoreFactoryDefaults();
+    m_bottomRightMotor.restoreFactoryDefaults();
+
+    m_rightMotorGroup.setInverted(true);
   }
 
   public void drive(double xaxisSpeed, double yaxisSpeed) {
