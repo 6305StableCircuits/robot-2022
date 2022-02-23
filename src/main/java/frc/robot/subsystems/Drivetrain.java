@@ -15,25 +15,25 @@ public class Drivetrain extends SubsystemBase {
   /** Initialize the Drivetrain. */
   
   // Initialize our Spark Max Motor Controllers 
-  private CANSparkMax m_topLeftMotor = new CANSparkMax(RobotMap.topLeftDriveMotor, MotorType.kBrushless);
-  private CANSparkMax m_bottomLeftMotor = new CANSparkMax(RobotMap.bottomLeftDriveMotor, MotorType.kBrushless);
-  private CANSparkMax m_topRightMotor = new CANSparkMax(RobotMap.topRightDriveMotor, MotorType.kBrushless);
-  private CANSparkMax m_bottomRightMotor = new CANSparkMax(RobotMap.bottomRightDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_frontLeftMotor = new CANSparkMax(RobotMap.frontLeftDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_backLeftMotor = new CANSparkMax(RobotMap.backLeftDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_frontRightMotor = new CANSparkMax(RobotMap.frontRightDriveMotor, MotorType.kBrushless);
+  private CANSparkMax m_backRightMotor = new CANSparkMax(RobotMap.backRightDriveMotor, MotorType.kBrushless);
   
   // Create motor groups for drive.
-  private MotorControllerGroup m_leftMotorGroup = new MotorControllerGroup(m_topLeftMotor, m_bottomLeftMotor);
-  private MotorControllerGroup m_rightMotorGroup = new MotorControllerGroup(m_topRightMotor, m_bottomRightMotor);
+  private MotorControllerGroup m_leftMotorGroup = new MotorControllerGroup(m_frontLeftMotor, m_backLeftMotor);
+  private MotorControllerGroup m_rightMotorGroup = new MotorControllerGroup(m_frontRightMotor, m_backRightMotor);
 
   // Initialize our Drivetrain
   private DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
 
   public Drivetrain() {
-    m_topLeftMotor.restoreFactoryDefaults();
-    m_bottomLeftMotor.restoreFactoryDefaults();
-    m_topRightMotor.restoreFactoryDefaults();
-    m_bottomRightMotor.restoreFactoryDefaults();
+    m_frontLeftMotor.restoreFactoryDefaults();
+    m_backLeftMotor.restoreFactoryDefaults();
+    m_frontRightMotor.restoreFactoryDefaults();
+    m_backRightMotor.restoreFactoryDefaults();
 
-    m_rightMotorGroup.setInverted(true);
+    m_leftMotorGroup.setInverted(true);
   }
 
   public void drive(double xaxisSpeed, double yaxisSpeed) {

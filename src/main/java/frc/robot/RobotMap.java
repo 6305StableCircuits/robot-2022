@@ -7,17 +7,31 @@ package frc.robot;
  */
 public class RobotMap {
     /** Ports */
-    // The top left drive motor port
-    public static int topLeftDriveMotor = 1;
-    // The bottom left drive motor port
-    public static int bottomLeftDriveMotor = 2;
-    // The top right drive motor port
-    public static int topRightDriveMotor = 3;
-    // The bottom right drive motor port
-    public static int bottomRightDriveMotor = 4;
+    // The front left drive motor ID
+    public static int frontLeftDriveMotor = 12;
+    // The back left drive motor ID
+    public static int backLeftDriveMotor = 13;
+    // The front right drive motor ID
+    public static int frontRightDriveMotor = 3;
+    // The back right drive motor ID
+    public static int backRightDriveMotor = 2;
+    // The top right shooter motor ID
+    public static int topRightShooter = 1;
+    // The bottom right shooter motor ID
+    public static int bottomRightShooter = 0;
+    // The top left shooter motor ID
+    public static int topLeftShooter = 9;
+    // The bottom left shooter motor ID
+    public static int bottomLeftShooter = 8;
+    // The intake motor ID
+    public static int intake = 7;
 
     /** Speeds */
     // Intake Motor Speed
-    public static double intakeSpeed = 0.25;
+    public static double intakeSpeed = 0.5;
+    // Lower Shooter Motor Speed
+    public static double bottomShooterSpeed = 0.5;
+    // Upper Shooter Motor Speed
+    public static double topShooterSpeed = 0.8;
 
 }
