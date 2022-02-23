@@ -14,8 +14,8 @@ import frc.robot.commands.DriveForward;
 import frc.robot.commands.SpinIntake;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -27,14 +27,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Intake m_intake = new Intake();
+  private final Shooter m_shooter = new Shooter();
 
   private final DriveForward m_driveForward = new DriveForward(m_drivetrain);
   private final TankDrive m_tankDrive = new TankDrive(m_drivetrain);
 
-  private final SpinIntake m_spinIntake = new SpinIntake(m_intake);
+  private final SpinIntake m_spinIntake = new SpinIntake(m_intake, m_shooter);
 
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 

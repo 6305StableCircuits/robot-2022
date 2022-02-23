@@ -4,27 +4,28 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.RobotOI;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class SpinIntake extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Intake m_subsystem;
+  private final Intake m_intake;
+  private final Shooter m_shooter;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public SpinIntake(Intake subsystem) {
-    m_subsystem = subsystem;
+  public SpinIntake(Intake intakeSubsystem, Shooter shooterSubsystem) {
+    m_intake = intakeSubsystem;
+    m_shooter = shooterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(intakeSubsystem);
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -35,13 +36,15 @@ public class SpinIntake extends CommandBase {
   @Override
   public void execute() {
     // RobotOI.xboxController.get
-    m_subsystem.spinIntakeMotor(RobotMap.intakeSpeed);
+    m_intake.spinIntakeMotor(RobotMap.intakeSpeed);
+    m_shooter.spinBottomShooter(RobotMap.bottomShooterSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.stopIntakeMotor();
+    m_intake.stopIntakeMotor();
+    m_shooter.stopBottomShooter();
   }
 
   // Returns true when the command should end.
