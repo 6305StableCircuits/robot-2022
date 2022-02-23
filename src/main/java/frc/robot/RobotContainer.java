@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveForward;
+import frc.robot.commands.Shoot;
 import frc.robot.commands.SpinIntake;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
@@ -35,6 +36,7 @@ public class RobotContainer {
   private final TankDrive m_tankDrive = new TankDrive(m_drivetrain);
 
   private final SpinIntake m_spinIntake = new SpinIntake(m_intake, m_shooter);
+  private final Shoot m_shoot = new Shoot(m_shooter);
 
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -54,7 +56,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     m_drivetrain.setDefaultCommand(m_tankDrive);
 
-    RobotOI.xboxLeftBumper.whileActiveContinuous(m_spinIntake);
+    RobotOI.xboxAButton.whileActiveContinuous(m_spinIntake);
+    RobotOI.xboxBButton.whileActiveContinuous(m_shoot);
   }
 
   private void addAutonomous() {

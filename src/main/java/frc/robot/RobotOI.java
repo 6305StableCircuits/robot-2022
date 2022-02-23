@@ -12,5 +12,6 @@ public class RobotOI {
 
     public static XboxController xboxController = new XboxController(2);
 
-    public static JoystickButton xboxLeftBumper = new JoystickButton(xboxController, XboxController.Axis.kLeftTrigger.value);
+    public static JoystickButton xboxAButton = new JoystickButton(xboxController, Button.kA.value);
+    public static JoystickButton xboxBButton = new JoystickButton(xboxController, Button.kB.value);
 }
