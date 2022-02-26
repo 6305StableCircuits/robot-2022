@@ -14,4 +14,7 @@ public class RobotOI {
 
     public static JoystickButton xboxAButton = new JoystickButton(xboxController, Button.kA.value);
     public static JoystickButton xboxBButton = new JoystickButton(xboxController, Button.kB.value);
+    public static JoystickButton xboxXButton = new JoystickButton(xboxController, Button.kX.value);
+    public static JoystickButton xboxYButton = new JoystickButton(xboxController, Button.kY.value);
+    public static JoystickButton xboxLBButton = new JoystickButton(xboxController, Button.kLeftBumper.value);
 }

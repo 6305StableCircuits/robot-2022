@@ -16,22 +16,22 @@ public class RobotMap {
     // The back right drive motor ID
     public static int backRightDriveMotor = 2;
     // The top right shooter motor ID
-    public static int topRightShooter = 1;
+    public static int topRightShooter = 8;
     // The bottom right shooter motor ID
-    public static int bottomRightShooter = 0;
+    public static int bottomRightShooter = 9;
     // The top left shooter motor ID
-    public static int topLeftShooter = 9;
+    public static int topLeftShooter = 0;
     // The bottom left shooter motor ID
-    public static int bottomLeftShooter = 8;
+    public static int bottomLeftShooter = 1;
     // The intake motor ID
     public static int intake = 7;
 
     /** Speeds */
     // Intake Motor Speed
-    public static double intakeSpeed = 0.5;
+    public static double intakeSpeed = 0.6;
     // Lower Shooter Motor Speed
-    public static double bottomShooterSpeed = 0.5;
+    public static double bottomShooterSpeed = 0.6;
     // Upper Shooter Motor Speed
-    public static double topShooterSpeed = 0.8;
+    public static double topShooterSpeed = 1;
 
 }

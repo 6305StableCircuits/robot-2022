@@ -12,8 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveForward;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.ShootReverse;
 import frc.robot.commands.SpinIntake;
+import frc.robot.commands.SpinIntakeReverse;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.Yeet;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -36,7 +39,10 @@ public class RobotContainer {
   private final TankDrive m_tankDrive = new TankDrive(m_drivetrain);
 
   private final SpinIntake m_spinIntake = new SpinIntake(m_intake, m_shooter);
+  private final SpinIntakeReverse m_spinIntakeReverse = new SpinIntakeReverse(m_intake, m_shooter);
   private final Shoot m_shoot = new Shoot(m_shooter);
+  private final ShootReverse m_shootReverse = new ShootReverse(m_shooter);
+  private final Yeet m_Yeet = new Yeet(m_shooter);
 
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -57,7 +63,10 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(m_tankDrive);
 
     RobotOI.xboxAButton.whileActiveContinuous(m_spinIntake);
+    RobotOI.xboxXButton.whileActiveContinuous(m_spinIntakeReverse);
     RobotOI.xboxBButton.whileActiveContinuous(m_shoot);
+    RobotOI.xboxYButton.whileActiveContinuous(m_shootReverse);
+    RobotOI.xboxLBButton.whileActiveContinuous(m_Yeet);
   }
 
   private void addAutonomous() {
