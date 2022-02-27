@@ -45,7 +45,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void drive(double xaxisSpeed, double yaxisSpeed) {
-    m_drive.tankDrive(xaxisSpeed * 0.75, yaxisSpeed * 0.75);
+    m_drive.tankDrive(xaxisSpeed, yaxisSpeed);
   }
 
   @Override

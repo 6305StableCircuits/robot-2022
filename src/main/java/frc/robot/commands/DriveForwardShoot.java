@@ -5,12 +5,14 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class DriveForward extends CommandBase {
+public class DriveForwardShoot extends CommandBase {
   private final Drivetrain m_drivetrain;
+  private final Shooter m_shooter;
   private final Timer m_timer = new Timer();
 
   /**
@@ -18,10 +20,12 @@ public class DriveForward extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForward(Drivetrain subsystem) {
-    m_drivetrain = subsystem;
+  public DriveForwardShoot(Drivetrain driveSubsystem, Shooter shootSubsystem) {
+    m_drivetrain = driveSubsystem;
+    m_shooter = shootSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_drivetrain);
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -33,17 +37,31 @@ public class DriveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(-0.75, -0.75);
+    if (m_timer.get() <= 0.3) {
+      m_shooter.spinBottomShooter(.75);
+      m_shooter.spinTopShooter(.75);
+      
+    }
+    else if (m_timer.get() == 0.3) {
+      m_shooter.stopBottomShooter();
+      m_shooter.stopTopShooter();
+    }
+    else {
+      m_drivetrain.drive(-0.55, -0.55);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_shooter.stopBottomShooter();
+    m_shooter.stopTopShooter(); 
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_timer.get() >= 2) {
+    if (m_timer.get() >= 2.3) {
       m_timer.stop();
       m_timer.reset();
       return true;

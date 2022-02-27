@@ -31,7 +31,7 @@ public class Yeet extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.spinBottomShooter(RobotMap.bottomShooterSpeed);
+    m_subsystem.spinBottomShooter(RobotMap.bottomShooterFullSpeed);
     m_subsystem.spinTopShooter(RobotMap.topShooterSpeed);
   }
 

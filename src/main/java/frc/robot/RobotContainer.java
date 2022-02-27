@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveForward;
+import frc.robot.commands.DriveForwardShoot;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.ShootReverse;
 import frc.robot.commands.SpinIntake;
@@ -36,6 +37,7 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
 
   private final DriveForward m_driveForward = new DriveForward(m_drivetrain);
+  private final DriveForwardShoot m_driveForwardShoot = new DriveForwardShoot(m_drivetrain, m_shooter);
   private final TankDrive m_tankDrive = new TankDrive(m_drivetrain);
 
   private final SpinIntake m_spinIntake = new SpinIntake(m_intake, m_shooter);
@@ -63,14 +65,15 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(m_tankDrive);
 
     RobotOI.xboxAButton.whileActiveContinuous(m_spinIntake);
-    RobotOI.xboxXButton.whileActiveContinuous(m_spinIntakeReverse);
     RobotOI.xboxBButton.whileActiveContinuous(m_shoot);
+    RobotOI.xboxXButton.whileActiveContinuous(m_spinIntakeReverse);
     RobotOI.xboxYButton.whileActiveContinuous(m_shootReverse);
     RobotOI.xboxLBButton.whileActiveContinuous(m_Yeet);
   }
 
   private void addAutonomous() {
     m_chooser.addOption("Drive Forwards", m_driveForward);
+    m_chooser.addOption("Drive Forwards & Shoot", m_driveForwardShoot);
     SmartDashboard.putData(m_chooser);
   }
 
