@@ -5,12 +5,14 @@
 package frc.robot.commands;
 
 import frc.robot.RobotMap;
+import frc.robot.RobotOI;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class SpinIntakeReverse extends CommandBase {
+public class Yoink extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Intake m_intake;
   private final Shooter m_shooter;
@@ -20,7 +22,7 @@ public class SpinIntakeReverse extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public SpinIntakeReverse(Intake intakeSubsystem, Shooter shooterSubsystem) {
+  public Yoink(Intake intakeSubsystem, Shooter shooterSubsystem) {
     m_intake = intakeSubsystem;
     m_shooter = shooterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,8 +38,10 @@ public class SpinIntakeReverse extends CommandBase {
   @Override
   public void execute() {
     // RobotOI.xboxController.get
-    m_intake.spinIntakeMotor(-RobotMap.intakeSpeed/2);
-    m_shooter.spinBottomShooter(-RobotMap.bottomShooterSpeed/2);
+    m_intake.spinIntakeMotor(RobotMap.intakeSpeed);
+    m_shooter.spinBottomShooter(RobotMap.bottomShooterSpeed);
+    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 0.3);
+    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 0.7);
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +49,8 @@ public class SpinIntakeReverse extends CommandBase {
   public void end(boolean interrupted) {
     m_intake.stopIntakeMotor();
     m_shooter.stopBottomShooter();
+    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 0);
+    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 0);
   }
 
   // Returns true when the command should end.

@@ -30,7 +30,7 @@ public class RobotMap {
     // Intake Motor Speed
     public static double intakeSpeed = 0.6;
     // Lower Shooter Motor Speed
-    public static double bottomShooterSpeed = 0.8;
+    public static double bottomShooterSpeed = 0.6;
     // Lower Shooter When All Run
     public static double bottomShooterFullSpeed = 1;
     // Upper Shooter Motor Speed

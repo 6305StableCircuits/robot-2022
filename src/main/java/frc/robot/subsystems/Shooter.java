@@ -22,8 +22,7 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   public Shooter() {
     // Invert right-side motors
-    m_bottomLeftShooterMotor.setInverted(true);
-    m_bottomRightShooterMotor.setInverted(true);
+    m_bottomShooterGroup.setInverted(true);
   }
 
   public void spinBottomShooter(double speed) {

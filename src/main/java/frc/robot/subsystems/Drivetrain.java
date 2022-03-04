@@ -54,12 +54,16 @@ public class Drivetrain extends SubsystemBase {
     // Dump Encoder Data to Shuffleboard
     SmartDashboard.putNumber("Front Left Encoder Position", m_frontLeftEncoder.getPosition());
     SmartDashboard.putNumber("Front Left Encoder Velocity", m_frontLeftEncoder.getVelocity());
+    SmartDashboard.putNumber("Front Left Motor Temperature", m_frontLeftMotor.getMotorTemperature());
     SmartDashboard.putNumber("Back Left Encoder Position", m_backLeftEncoder.getPosition());
     SmartDashboard.putNumber("Back Left Encoder Velocity", m_backLeftEncoder.getVelocity());
+    SmartDashboard.putNumber("Back Left Motor Temperature", m_backLeftMotor.getMotorTemperature());
     SmartDashboard.putNumber("Front Right Encoder Position", m_frontRightEncoder.getPosition());
     SmartDashboard.putNumber("Front Right Encoder Velocity", m_frontRightEncoder.getVelocity());
+    SmartDashboard.putNumber("Front Right Motor Temperature", m_frontRightMotor.getMotorTemperature());
     SmartDashboard.putNumber("Back Right Encoder Position", m_backRightEncoder.getPosition());
     SmartDashboard.putNumber("Back Right Encoder Velocity", m_backRightEncoder.getVelocity());
+    SmartDashboard.putNumber("Back Right Motor Temperature", m_backRightMotor.getMotorTemperature());
   }
 
   @Override

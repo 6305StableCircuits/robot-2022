@@ -5,11 +5,13 @@
 package frc.robot.commands;
 
 import frc.robot.RobotMap;
+import frc.robot.RobotOI;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ShootReverse extends CommandBase {
+public class Unyeet extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_subsystem;
 
@@ -18,7 +20,7 @@ public class ShootReverse extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShootReverse(Shooter subsystem) {
+  public Unyeet(Shooter subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -31,13 +33,19 @@ public class ShootReverse extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.spinTopShooter(-RobotMap.topShooterSpeed);
+    m_subsystem.spinBottomShooter(-RobotMap.bottomShooterSpeed / 2);
+    m_subsystem.spinTopShooter(-RobotMap.bottomShooterSpeed / 2);
+    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 0.1);
+    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 0.1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_subsystem.stopBottomShooter();
     m_subsystem.stopTopShooter();
+    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 0);
+    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 0);
   }
 
   // Returns true when the command should end.

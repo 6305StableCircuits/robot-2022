@@ -5,7 +5,9 @@
 package frc.robot.commands;
 
 import frc.robot.RobotMap;
+import frc.robot.RobotOI;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -33,6 +35,8 @@ public class Yeet extends CommandBase {
   public void execute() {
     m_subsystem.spinBottomShooter(RobotMap.bottomShooterFullSpeed);
     m_subsystem.spinTopShooter(RobotMap.topShooterSpeed);
+    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 1);
+    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 1);
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +44,8 @@ public class Yeet extends CommandBase {
   public void end(boolean interrupted) {
     m_subsystem.stopBottomShooter();
     m_subsystem.stopTopShooter();
+    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 0);
+    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 0);
   }
 
   // Returns true when the command should end.

@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.RobotOI;
 import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TankDrive extends CommandBase {
