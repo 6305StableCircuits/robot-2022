@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveForward;
 import frc.robot.commands.DriveForwardShoot;
+// import frc.robot.commands.GearTest;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Yoink;
 import frc.robot.commands.TankDrive;
@@ -35,6 +36,7 @@ public class RobotContainer {
   private final DriveForward m_driveForward = new DriveForward(m_drivetrain);
   private final DriveForwardShoot m_driveForwardShoot = new DriveForwardShoot(m_drivetrain, m_shooter);
   private final TankDrive m_tankDrive = new TankDrive(m_drivetrain);
+  // private final GearTest m_gearTest = new GearTest(m_drivetrain);
 
   private final Yoink m_Yoink = new Yoink(m_intake, m_shooter);
   private final Shoot m_shoot = new Shoot(m_shooter);
@@ -63,6 +65,8 @@ public class RobotContainer {
     RobotOI.xboxBButton.whileActiveContinuous(m_shoot);
     RobotOI.xboxLBButton.whileActiveContinuous(m_Yeet);
     RobotOI.xboxRBButton.whileActiveContinuous(m_Unyeet);
+    RobotOI.xboxRBButton.whileActiveContinuous(m_Unyeet);
+    // RobotOI.xboxRStick.whileActiveContinuous(m_gearTest);
   }
 
   private void addAutonomous() {
