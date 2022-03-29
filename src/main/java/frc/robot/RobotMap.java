@@ -25,6 +25,10 @@ public class RobotMap {
     public static int bottomLeftShooter = 1;
     // The intake motor ID
     public static int intake = 7;
+    // Left Hang motor ID
+    public static int leftHang = 2;
+    // Right Hang motor ID
+    public static int rightHang = 3;
 
     /** Speeds */
     // Intake Motor Speed
@@ -35,5 +39,10 @@ public class RobotMap {
     public static double bottomShooterFullSpeed = 1;
     // Upper Shooter Motor Speed
     public static double topShooterSpeed = 1;
+    // Hang Up Speed
+    public static double hangUpSpeed = -1;
+    // Hang Down Speed
+    public static double hangDownSpeed = 0.7;
+    
 
 }

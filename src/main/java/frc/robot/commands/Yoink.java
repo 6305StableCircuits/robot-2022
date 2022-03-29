@@ -40,8 +40,6 @@ public class Yoink extends CommandBase {
     // RobotOI.xboxController.get
     m_intake.spinIntakeMotor(RobotMap.intakeSpeed);
     m_shooter.spinBottomShooter(RobotMap.bottomShooterSpeed);
-    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 0.3);
-    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 0.7);
   }
 
   // Called once the command ends or is interrupted.
@@ -49,8 +47,6 @@ public class Yoink extends CommandBase {
   public void end(boolean interrupted) {
     m_intake.stopIntakeMotor();
     m_shooter.stopBottomShooter();
-    RobotOI.xboxController.setRumble(RumbleType.kLeftRumble, 0);
-    RobotOI.xboxController.setRumble(RumbleType.kRightRumble, 0);
   }
 
   // Returns true when the command should end.

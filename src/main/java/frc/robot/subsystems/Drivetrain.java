@@ -48,6 +48,10 @@ public class Drivetrain extends SubsystemBase {
     m_drive.tankDrive(xaxisSpeed, yaxisSpeed);
   }
 
+  public void yaw(double speed) {
+    m_drive.tankDrive(speed, -speed);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -4,24 +4,21 @@
 
 package frc.robot.commands;
 
-import frc.robot.RobotMap;
 import frc.robot.RobotOI;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/** An example command that uses an example subsystem. */
-public class Yeet extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Shooter m_subsystem;
+public class Yaw extends CommandBase {
+  private final Drivetrain m_drivetrain;
 
   /**
-   * Creates a new ExampleCommand.
+   * Create the TankDrive command.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Yeet(Shooter subsystem) {
-    m_subsystem = subsystem;
+  public Yaw(Drivetrain subsystem) {
+    m_drivetrain = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -33,16 +30,12 @@ public class Yeet extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.spinBottomShooter(RobotMap.bottomShooterFullSpeed);
-    m_subsystem.spinTopShooter(RobotMap.topShooterSpeed);
+    m_drivetrain.yaw(-RobotOI.m_rightStick.getZ()/2);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_subsystem.stopBottomShooter();
-    m_subsystem.stopTopShooter();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

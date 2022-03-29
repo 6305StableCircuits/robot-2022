@@ -4,49 +4,63 @@
 
 package frc.robot.commands;
 
-import frc.robot.RobotMap;
-import frc.robot.RobotOI;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class Yeet extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Shooter m_subsystem;
+public class AutoIntake extends CommandBase {
+  private final Shooter m_shooter;
+  private final Intake m_intake;
+  private final Timer m_timer = new Timer();
+  private double endTime = 0;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Yeet(Shooter subsystem) {
-    m_subsystem = subsystem;
+  public AutoIntake(Shooter shootSubsystem, Intake intakeSubsystem, double time) {
+    m_shooter = shootSubsystem;
+    m_intake = intakeSubsystem;
+    endTime = time;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(m_shooter);
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.spinBottomShooter(RobotMap.bottomShooterFullSpeed);
-    m_subsystem.spinTopShooter(RobotMap.topShooterSpeed);
+    m_intake.spinIntakeMotor(0.6);
+    m_shooter.spinBottomShooter(0.6);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.stopBottomShooter();
-    m_subsystem.stopTopShooter();
+    m_intake.stopIntakeMotor();
+    m_shooter.stopBottomShooter(); 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (m_timer.get() >= endTime) {
+      m_timer.stop();
+      m_timer.reset();
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }

@@ -8,14 +8,24 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DriveForward;
-import frc.robot.commands.DriveForwardShoot;
+import frc.robot.commands.FullAuto;
+import frc.robot.commands.FullAutoDelayShoot;
+import frc.robot.commands.FullAutoIntake;
+import frc.robot.commands.FullAutoShoot;
+import frc.robot.commands.HalfAuto;
+import frc.robot.commands.HalfAutoDelayShoot;
+import frc.robot.commands.HangAdjustL;
+import frc.robot.commands.HangAdjustR;
+import frc.robot.commands.HangDown;
+import frc.robot.commands.HangUp;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Yoink;
 import frc.robot.commands.TankDrive;
 import frc.robot.commands.Unyeet;
+import frc.robot.commands.Yaw;
 import frc.robot.commands.Yeet;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Hanger;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -31,10 +41,25 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
+  private final Hanger m_hanger = new Hanger();
 
-  private final DriveForward m_driveForward = new DriveForward(m_drivetrain);
-  private final DriveForwardShoot m_driveForwardShoot = new DriveForwardShoot(m_drivetrain, m_shooter);
+  // private final AutoDrive m_autoDrive = new AutoDrive(m_drivetrain);
+  // private final AutoShoot m_autoShoot = new AutoShoot(m_shooter);
+  private final FullAuto m_fullAuto = new FullAuto(m_drivetrain, m_shooter, m_intake);
+  private final HalfAuto m_halfAuto = new HalfAuto(m_drivetrain, m_shooter, m_intake);
+  private final FullAutoShoot m_fullAutoShoot = new FullAutoShoot(m_drivetrain, m_shooter, m_intake);
+  private final FullAutoIntake m_fullAutoIntake = new FullAutoIntake(m_drivetrain, m_shooter, m_intake);
+  private final FullAutoDelayShoot m_fullAutoDelayShoot = new FullAutoDelayShoot(m_drivetrain, m_shooter, m_intake);
+  private final HalfAutoDelayShoot m_halfAutoDelayShoot = new HalfAutoDelayShoot(m_drivetrain, m_shooter, m_intake);
   private final TankDrive m_tankDrive = new TankDrive(m_drivetrain);
+  private final Yaw m_yaw = new Yaw(m_drivetrain);
+
+  private final HangUp m_hangUp = new HangUp(m_hanger);
+  private final HangAdjustL m_hangLUp = new HangAdjustL(m_hanger, RobotMap.hangUpSpeed);
+  private final HangAdjustR m_hangRUp = new HangAdjustR(m_hanger, RobotMap.hangUpSpeed);
+  private final HangDown m_hangDown = new HangDown(m_hanger);
+  private final HangAdjustL m_hangLDown = new HangAdjustL(m_hanger, RobotMap.hangDownSpeed);
+  private final HangAdjustR m_hangRDown = new HangAdjustR(m_hanger, RobotMap.hangDownSpeed);
 
   private final Yoink m_Yoink = new Yoink(m_intake, m_shooter);
   private final Shoot m_shoot = new Shoot(m_shooter);
@@ -63,11 +88,25 @@ public class RobotContainer {
     RobotOI.xboxBButton.whileActiveContinuous(m_shoot);
     RobotOI.xboxLBButton.whileActiveContinuous(m_Yeet);
     RobotOI.xboxRBButton.whileActiveContinuous(m_Unyeet);
+    RobotOI.rightStickTrigger.whileActiveContinuous(m_yaw);
+    
+    RobotOI.xboxUpButton.whileActiveContinuous(m_hangUp);
+    RobotOI.xboxUpLeftButton.whileActiveContinuous(m_hangLUp);
+    RobotOI.xboxUpRightButton.whileActiveContinuous(m_hangRUp);
+    RobotOI.xboxDownButton.whileActiveContinuous(m_hangDown);
+    RobotOI.xboxDownLeftButton.whileActiveContinuous(m_hangLDown);
+    RobotOI.xboxDownRightButton.whileActiveContinuous(m_hangRDown);
   }
 
   private void addAutonomous() {
-    m_chooser.addOption("Drive Forwards", m_driveForward);
-    m_chooser.addOption("Drive Forwards & Shoot", m_driveForwardShoot);
+    // m_chooser.addOption("Drive Forwards", m_autoDrive);
+    // m_chooser.addOption("Drive Forwards", m_autoShoot);
+    m_chooser.addOption("Full Auto Shoot+Intake+Shoot", m_fullAuto);
+    m_chooser.addOption("Half Auto Shoot+Intake+Shoot", m_halfAuto);
+    m_chooser.addOption("Full Auto Shoot", m_fullAutoShoot);
+    m_chooser.addOption("Full Auto Intake", m_fullAutoIntake);
+    m_chooser.addOption("Full Auto Delay Shoot", m_fullAutoDelayShoot);
+    m_chooser.addOption("Half Auto Delay Shoot", m_halfAutoDelayShoot);
     SmartDashboard.putData(m_chooser);
   }
 

@@ -10,21 +10,20 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class DriveForwardShoot extends CommandBase {
-  private final Drivetrain m_drivetrain;
+public class AutoShoot extends CommandBase {
   private final Shooter m_shooter;
   private final Timer m_timer = new Timer();
+  private double endTime = 0;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForwardShoot(Drivetrain driveSubsystem, Shooter shootSubsystem) {
-    m_drivetrain = driveSubsystem;
+  public AutoShoot(Shooter shootSubsystem, double time) {
     m_shooter = shootSubsystem;
+    endTime = time;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_drivetrain);
     addRequirements(m_shooter);
   }
 
@@ -38,16 +37,12 @@ public class DriveForwardShoot extends CommandBase {
   @Override
   public void execute() {
     if (m_timer.get() <= 0.3) {
-      m_shooter.spinBottomShooter(.75);
-      m_shooter.spinTopShooter(.75);
-      
-    }
-    else if (m_timer.get() == 0.3) {
-      m_shooter.stopBottomShooter();
-      m_shooter.stopTopShooter();
+      m_shooter.spinBottomShooter(1);
+      m_shooter.spinTopShooter(1);
     }
     else {
-      m_drivetrain.drive(-0.55, -0.55);
+      m_shooter.stopBottomShooter();
+      m_shooter.stopTopShooter();
     }
   }
 
@@ -61,7 +56,7 @@ public class DriveForwardShoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_timer.get() >= 2.3) {
+    if (m_timer.get() >= endTime) {
       m_timer.stop();
       m_timer.reset();
       return true;

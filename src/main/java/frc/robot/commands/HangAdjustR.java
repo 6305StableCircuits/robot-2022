@@ -4,52 +4,51 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.Timer;
+import frc.robot.RobotMap;
+import frc.robot.RobotOI;
+import frc.robot.subsystems.Hanger;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class DriveForward extends CommandBase {
-  private final Drivetrain m_drivetrain;
-  private final Timer m_timer = new Timer();
+public class HangAdjustR extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final Hanger m_hanger;
+  private double speed;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForward(Drivetrain subsystem) {
-    m_drivetrain = subsystem;
+  public HangAdjustR(Hanger hangerSubsystem, double moveSpeed) {
+    m_hanger = hangerSubsystem;
+    speed = moveSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_drivetrain);
+    addRequirements(hangerSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_timer.start();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(-0.75, -0.75);
+    m_hanger.spinRHang(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_hanger.stopHang();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_timer.get() >= 2) {
-      m_timer.stop();
-      m_timer.reset();
-      return true;
-    }
-    else {
-      return false;
-    }
+    return false;
   }
 }
